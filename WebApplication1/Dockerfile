@@ -16,9 +16,9 @@ RUN dotnet build "./WebApplication1.csproj" -c $BUILD_CONFIGURATION -o /app/buil
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Debug
-RUN dotnet publish "./WebApplication1.csproj" -c $BUILD_CONFIGURATION -o /bin/Debug/net5.0/  /p:UseAppHost=false
+RUN dotnet publish "./WebApplication1.csproj" -c $BUILD_CONFIGURATION -o /bin/Debug/net8.0/  /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
-COPY --from=publish /bin/Debug/net5.0/ . 
+COPY --from=publish /bin/Debug/net8.0/ . 
 ENTRYPOINT ["dotnet", "WebApplication1.dll"]
